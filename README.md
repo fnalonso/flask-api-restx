@@ -12,12 +12,14 @@ Para que o projeto funcione corretamente, deve-se configurar as seguintes variav
 .env/db.env
 
 MYSQL_ROOT_PASSWORD=<SENHA_ROOT>
+
 MYSQL_DATABASE=<NOME_DATABASE>
 
 
 .env/api.env
 
 SECRET=<Chave que será utilizada pelo flask-jwt-extended para criptografar os tokens JWT>
+
 SQLALCHEMY_DATABASE_URI=<URI para acesso ao banco de dados no padrão mysql+pymysql://<usuario>:<senha>@<host>/<db_name>
 
 
