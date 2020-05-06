@@ -12,7 +12,8 @@ authorizations = {
     }
 }
 
-api = Api(title="Super API", version="1.0", description="Super gigantic API", authorizations=authorizations)
+api = Api(title="Super API", version="1.0", description="Super gigantic API",
+          authorizations=authorizations)
 api.add_namespace(cat_ns)
 api.add_namespace(dog_ns)
 api.add_namespace(user_ns)

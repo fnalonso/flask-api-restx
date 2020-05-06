@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace, fields
 from flask_jwt_extended import jwt_required
 
-from models.dog import Dog as DogModel
+from src.models.dog import Dog as DogModel
 
 ns = Namespace('dogs', 'Dogs resources.')
 

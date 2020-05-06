@@ -1,7 +1,7 @@
 from flask_restx import Resource, Namespace, fields
 from flask_jwt_extended import jwt_required
 
-from models.cat import Cat as CatModel
+from src.models.cat import Cat as CatModel
 
 
 ns = Namespace('cats', 'Cats resources.')

@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 5000
 
-ENTRYPOINT ["gunicorn", "--chdir", "src", "app:app", "-b", "0.0.0.0:5000", "-w", "4", "--reload"]
+ENTRYPOINT ["gunicorn", "--chdir", "src", "app:create_app()", "-b", "0.0.0.0:5000", "-w", "4", "--reload"]

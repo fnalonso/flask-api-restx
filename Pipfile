@@ -12,6 +12,9 @@ flask-restx = "*"
 gunicorn = "*"
 pymysql = "*"
 flask-jwt-extended = "*"
+pytest = "*"
+pytest-flask = "*"
+flake8 = "*"
 
 [requires]
 python_version = "3.7"

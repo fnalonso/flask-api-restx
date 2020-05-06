@@ -1,4 +1,4 @@
-from models import db
+from src.models import db
 
 
 class Cat(db.Model):
@@ -28,5 +28,3 @@ class Cat(db.Model):
     def delete(self):
         db.session.delete(self)
         db.session.commit()
-
-

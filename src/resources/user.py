@@ -3,7 +3,7 @@ from flask_jwt_extended import create_refresh_token, create_access_token
 
 from flask_restx import Resource, Namespace, fields
 
-from models.user import UserModel
+from src.models.user import UserModel
 
 
 ns = Namespace("users", description="Users resource.")
@@ -27,7 +27,10 @@ class Users(Resource):
     @ns.expect(user_schema)
     @ns.marshal_with(user_schema, skip_none=True)
     def post(self):
-        user = UserModel(username=ns.payload.get('username'), password=ns.payload.get('password'))
+        user = UserModel(
+            username=ns.payload.get('username'),
+            password=ns.payload.get('password')
+        )
         user.save()
         return user.as_dict(), 201
 
@@ -57,6 +60,7 @@ token_schema = ns.model('Token', dict(
     refresh_token=fields.String(description="Refresh access token")
 ))
 
+
 @ns.route("/login")
 class Login(Resource):
     @ns.doc("post_user_login")
@@ -70,9 +74,9 @@ class Login(Resource):
             ns.abort(404)
 
         if safe_str_cmp(user.password, ns.payload.get('password')):
-            tokens = dict(
+            return dict(
                 access_token=create_access_token(user.id),
                 refresh_token=create_refresh_token(user.id)
             )
-
-        return tokens
+        else:
+            ns.abort(403)
