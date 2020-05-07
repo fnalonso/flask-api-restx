@@ -22,12 +22,8 @@ def test_list_empty_users(client):
 
 @pytest.mark.user
 @pytest.mark.regression
-def test_create_new_user(client):
-    res = client.post('users/', json=dict(
-        username="maradona",
-        password="123mudar"
-    ), follow_redirects=True)
-
+def test_create_new_user(client, user_data):
+    res = client.post('users/', json=user_data, follow_redirects=True)
     creation_response = res.get_json()
     assert res.status_code == 201 and creation_response.get('id')
 

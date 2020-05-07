@@ -12,8 +12,8 @@ def get_one_cat(client):
 
 @pytest.mark.cat
 @pytest.mark.regression
-def test_create_new_cat_authorized(client):
-    token = login(client, "maradona", "123mudar", access_token_only=True)
+def test_create_new_cat_authorized(client, user_data):
+    token = login(client, access_token_only=True, **user_data)
     header = dict(
         Authorization="Bearer " + token
     )
@@ -50,8 +50,8 @@ def test_get_nonexistent_cat(client):
 
 @pytest.mark.cat
 @pytest.mark.regression
-def test_update_cat(client):
-    token = login(client, "maradona", "123mudar", access_token_only=True)
+def test_update_cat(client, user_data):
+    token = login(client, access_token_only=True, **user_data)
     header = dict(
         Authorization="Bearer " + token
     )
@@ -99,8 +99,8 @@ def test_delete_cat_unauthorized(client):
 
 @pytest.mark.cat
 @pytest.mark.regression
-def test_delete_cat_authorized(client):
-    token = login(client, "maradona", "123mudar", access_token_only=True)
+def test_delete_cat_authorized(client, user_data):
+    token = login(client, access_token_only=True, **user_data)
     result = client.delete("/cats/1", headers=dict(
         Authorization="Bearer " + token
     ))
