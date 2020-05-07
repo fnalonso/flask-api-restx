@@ -3,6 +3,13 @@ import pytest
 from tests.test_users import login
 
 
+def get_one_cat(client):
+    cats = client.get("/cats/").get_json()
+    if len(cats) > 0:
+        return cats[0]
+    return None
+
+
 @pytest.mark.cat
 @pytest.mark.regression
 def test_create_new_cat_authorized(client):
@@ -30,7 +37,7 @@ def test_create_new_cat_unauthorized(client):
 @pytest.mark.cat
 @pytest.mark.regression
 def test_get_existing_cat(client):
-    result = client.get("/cats/1")
+    result = client.get(f"/cats/{get_one_cat(client).get('id')}")
     assert result.status_code == 200
 
 
@@ -49,7 +56,7 @@ def test_update_cat(client):
         Authorization="Bearer " + token
     )
     new_cat_name = "Gato Atualizado."
-    result = client.put("/cats/1", json=dict(
+    result = client.put(f"/cats/{get_one_cat(client).get('id')}", json=dict(
         name=new_cat_name
     ), headers=header)
 
