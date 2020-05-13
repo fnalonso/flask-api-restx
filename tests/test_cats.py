@@ -101,7 +101,7 @@ def test_delete_cat_unauthorized(client):
 @pytest.mark.regression
 def test_delete_cat_authorized(client, user_data):
     token = login(client, access_token_only=True, **user_data)
-    result = client.delete("/cats/1", headers=dict(
+    result = client.delete(f"/cats/{get_one_cat(client).get('id')}", headers=dict(
         Authorization="Bearer " + token
     ))
     assert result.status_code == 204
